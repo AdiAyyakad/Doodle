@@ -3,8 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="smallest_brush">10dp</dimen>
-    <integer name="smallest_size">10</integer>
-    <dimen name="largest_brush">50dp</dimen>
-    <integer name="largest_size">50</integer>
+    <integer name="smallest_size">1</integer>
+    <integer name="largest_size">100</integer>
+    <integer name="initial_size">20</integer>
 </resources>
