@@ -55,7 +55,7 @@ public class ScribbleView extends View {
         // Setup paint
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(brushSize);
+        drawPaint.setStrokeWidth(20);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -72,15 +72,18 @@ public class ScribbleView extends View {
 
         float touchX = event.getX();
         float touchY = event.getY();
-        
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                System.out.println("DOWN");
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
+                System.out.println("MOVE");
                 drawPath.lineTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_UP:
+                System.out.println("UP");
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
                 break;
