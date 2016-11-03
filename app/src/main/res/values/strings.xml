@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Doodle</string>
+    <string name="new_scribble">New</string>
+    <string name="brush">Brush</string>
+    <string name="erase">Erase</string>
+    <string name="save">Save</string>
+    <string name="paint">Paint</string>
+    <string name="brush_size">Brush Size</string>
 </resources>
