@@ -5,20 +5,26 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SeekBar;
 
 /**
  * Created by Adi on 11/2/16.
  */
 
-public class ScribbleView extends View {
+public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListener {
 
     private Path drawPath;
     private Paint drawPaint, canvasPaint;
     private int paintColor = 0xFF660000;
-    private int brushSize = R.dimen.smallest_brush;
+    private final int smallestSize = getResources().getInteger(R.integer.smallest_size);
+    private final int largestSize = getResources().getInteger(R.integer.largest_size);
+    private int brushSize = getResources().getInteger(R.integer.initial_size);
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
 
@@ -55,14 +61,13 @@ public class ScribbleView extends View {
         // Setup paint
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(20);
+        drawPaint.setStrokeWidth(brushSize);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
         // Setup canvas paint
         canvasPaint = new Paint(Paint.DITHER_FLAG);
-
     }
 
     // MARK: - Touch Events
@@ -75,15 +80,12 @@ public class ScribbleView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                System.out.println("DOWN");
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                System.out.println("MOVE");
                 drawPath.lineTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_UP:
-                System.out.println("UP");
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
                 break;
@@ -94,6 +96,26 @@ public class ScribbleView extends View {
         invalidate();
         return true;
 
+    }
+
+    // MARK: - Seek Bar
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+        if (seekBar.getId() == R.id.brush_seek_bar) {
+            if (i < smallestSize) {
+                i = smallestSize;
+            }
+            drawPaint.setStrokeWidth(i);
+        }
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
 }
