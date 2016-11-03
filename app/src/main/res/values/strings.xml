@@ -6,4 +6,8 @@
     <string name="save">Save</string>
     <string name="paint">Paint</string>
     <string name="brush_size">Brush Size</string>
+    <string name="opacity">Opacity</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
 </resources>

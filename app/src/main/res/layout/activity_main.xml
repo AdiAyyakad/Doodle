@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="#00660000"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"
+    android:weightSum="1">
 
     <LinearLayout
         android:id="@+id/brush_size_layout"
@@ -23,18 +24,111 @@
         <SeekBar
             android:id="@+id/brush_seek_bar"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp"
+            android:max="@integer/largest_size"
+            android:progress="@integer/initial_size" />
 
     </LinearLayout>
 
     <com.cmsc434.adi.doodle.ScribbleView
         android:id="@+id/scribble"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="317dp"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
-        android:background="#FFFFFFFF" />
+        android:background="#FFFFFFFF"
+        android:layout_weight="1.13" />
+
+    <LinearLayout
+        android:id="@+id/brush_size_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/opacity"
+            android:gravity="center" />
+
+        <SeekBar
+            android:id="@+id/opacity_seek_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:max="@integer/max_opacity"
+            android:progress="@integer/initial_opacity"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/brush_size_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/red"
+            android:gravity="center" />
+
+        <SeekBar
+            android:id="@+id/red_seek_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:max="@integer/max_color"
+            android:progress="@integer/initial_red"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/brush_size_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/green"
+            android:gravity="center" />
+
+        <SeekBar
+            android:id="@+id/green_seek_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:max="@integer/max_color"
+            android:progress="@integer/initial_green"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/brush_size_layout"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/blue"
+            android:gravity="center"
+            android:max="@integer/max_color" />
+
+        <SeekBar
+            android:id="@+id/blue_seek_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:max="@integer/max_color"
+            android:progress="@integer/initial_blue" />
+
+    </LinearLayout>
+
 
 </LinearLayout>

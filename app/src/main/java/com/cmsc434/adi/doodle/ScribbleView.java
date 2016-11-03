@@ -3,6 +3,8 @@ package com.cmsc434.adi.doodle;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
@@ -107,7 +109,30 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
                 i = smallestSize;
             }
             drawPaint.setStrokeWidth(i);
+        } else {
+            changeColor(seekBar, i);
         }
+    }
+
+    private void changeColor(SeekBar seekBar, int i) {
+        switch (seekBar.getId()) {
+            case R.id.opacity_seek_bar:
+                paintColor = Color.argb(i, Color.red(paintColor), Color.green(paintColor), Color.blue(paintColor));
+                break;
+            case R.id.red_seek_bar:
+                paintColor = Color.argb(Color.alpha(paintColor), i, Color.green(paintColor), Color.blue(paintColor));
+                break;
+            case R.id.green_seek_bar:
+                paintColor = Color.argb(Color.alpha(paintColor), Color.red(paintColor), i, Color.blue(paintColor));
+                break;
+            case R.id.blue_seek_bar:
+                paintColor = Color.argb(Color.alpha(paintColor), Color.red(paintColor), Color.green(paintColor), i);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid seek bar changed");
+        }
+
+        drawPaint.setColor(paintColor);
     }
 
     @Override

@@ -16,11 +16,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBrushSizeSeekBar() {
         ScribbleView scribbleView = (ScribbleView) findViewById(R.id.scribble);
-        SeekBar brushSizeSeekBar = (SeekBar) findViewById(R.id.brush_seek_bar);
 
-        brushSizeSeekBar.setMax(getResources().getInteger(R.integer.largest_size));
-        brushSizeSeekBar.setProgress(getResources().getInteger(R.integer.initial_size));
+        SeekBar brushSizeSeekBar = (SeekBar) findViewById(R.id.brush_seek_bar);
+        SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.opacity_seek_bar);
+        SeekBar redSeekBar = (SeekBar) findViewById(R.id.red_seek_bar);
+        SeekBar greenSeekBar = (SeekBar) findViewById(R.id.green_seek_bar);
+        SeekBar blueSeekBar = (SeekBar) findViewById(R.id.blue_seek_bar);
+
         brushSizeSeekBar.setOnSeekBarChangeListener(scribbleView);
+        opacitySeekBar.setOnSeekBarChangeListener(scribbleView);
+        redSeekBar.setOnSeekBarChangeListener(scribbleView);
+        greenSeekBar.setOnSeekBarChangeListener(scribbleView);
+        blueSeekBar.setOnSeekBarChangeListener(scribbleView);
+
     }
 
 }
