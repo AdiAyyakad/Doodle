@@ -2,6 +2,7 @@ package com.cmsc434.adi.doodle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
         greenSeekBar.setOnSeekBarChangeListener(scribbleView);
         blueSeekBar.setOnSeekBarChangeListener(scribbleView);
 
+    }
+
+    // MARK: - Button Hookups
+
+    public void onClickUndoPath(View v) {
+        ScribbleView scribbleView = (ScribbleView) findViewById(R.id.scribble);
+        // scribbleView.undo();
+    }
+
+    public void onClickRedoPath(View v) {
+        ScribbleView scribbleView = (ScribbleView) findViewById(R.id.scribble);
+        // scribbleView.onClickRedoPath();
     }
 
 }

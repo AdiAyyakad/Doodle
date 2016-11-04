@@ -1,6 +1,7 @@
 package com.cmsc434.adi.doodle;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,12 +22,10 @@ import android.widget.SeekBar;
 
 public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListener {
 
+    private Resources res = getResources();
     private Path drawPath;
     private Paint drawPaint, canvasPaint;
     private int paintColor = 0xFF660000;
-    private final int smallestSize = getResources().getInteger(R.integer.smallest_size);
-    private final int largestSize = getResources().getInteger(R.integer.largest_size);
-    private int brushSize = getResources().getInteger(R.integer.initial_size);
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
 
@@ -63,7 +62,7 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
         // Setup paint
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(brushSize);
+        drawPaint.setStrokeWidth(res.getInteger(R.integer.initial_size));
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -105,9 +104,6 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         if (seekBar.getId() == R.id.brush_seek_bar) {
-            if (i < smallestSize) {
-                i = smallestSize;
-            }
             drawPaint.setStrokeWidth(i);
         } else {
             changeColor(seekBar, i);

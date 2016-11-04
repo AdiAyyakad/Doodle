@@ -3,7 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <integer name="smallest_size">1</integer>
     <integer name="largest_size">100</integer>
     <integer name="max_opacity">1</integer>
     <integer name="max_color">255</integer>
