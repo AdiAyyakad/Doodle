@@ -27,7 +27,7 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
     private Resources res = getResources();
     private Path drawPath = new Path();
     private Paint drawPaint = new Paint();
-    private int paintColor = 0xFF660000;
+    private int paintColor = Color.argb(res.getInteger(R.integer.initial_opacity), res.getInteger(R.integer.initial_red), res.getInteger(R.integer.initial_green), res.getInteger(R.integer.initial_blue));
     private Canvas drawCanvas;
     private ArrayList<APath> paths = new ArrayList<>();
     private int amountOfPathsUndone = 0;
