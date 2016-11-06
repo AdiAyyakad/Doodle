@@ -3,15 +3,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <integer name="smallest_size">1</integer>
     <integer name="largest_size">100</integer>
-    <integer name="max_opacity">1</integer>
+    <integer name="max_opacity">100</integer>
     <integer name="max_color">255</integer>
 
     <integer name="initial_size">20</integer>
-    <integer name="initial_opacity">1</integer>
-    <integer name="initial_red">122</integer>
-    <integer name="initial_green">122</integer>
-    <integer name="initial_blue">122</integer>
+    <integer name="initial_opacity">255</integer>
+    <integer name="initial_red">0</integer>
+    <integer name="initial_green">12</integer>
+    <integer name="initial_blue">0</integer>
 
 </resources>
