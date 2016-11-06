@@ -28,6 +28,8 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
     private int paintColor = 0xFF660000;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
+    private ArrayList<APath> paths = new ArrayList<>();
+    private ArrayList<APath> undonePaths = new ArrayList<>();
 
     public ScribbleView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -47,8 +49,10 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        canvas.drawPath(drawPath, drawPaint);
+        // canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+        for (APath path : paths) {
+            canvas.drawPath(path.path, path.paint);
+        }
     }
 
     // MARK: - Setup
@@ -71,7 +75,7 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
-    // MARK: - Touch Events
+    // MARK: - Touch Event Handling (Scribbling)
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -81,6 +85,7 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                undonePaths.clear();
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -88,7 +93,8 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
                 break;
             case MotionEvent.ACTION_UP:
                 drawCanvas.drawPath(drawPath, drawPaint);
-                drawPath.reset();
+                paths.add(new APath(drawPath, new Paint(drawPaint)));
+                drawPath = new Path();
                 break;
             default:
                 return false;
@@ -97,6 +103,26 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
         invalidate();
         return true;
 
+    }
+
+    // MARK: - Undo/Redo
+
+    public void undo() {
+        if (paths.isEmpty()) return;
+
+        undonePaths.add(paths.get(paths.length() - 1));
+        paths.remove(paths.length()-1);
+
+        invalidate();
+    }
+
+    public void redo() {
+        if (undonePaths.isEmpty()) return;
+
+        paths.add(undonePaths.get(undonePaths.length() - 1));
+        undonePaths.remove(undonePaths.length()-1);
+
+        invalidate();
     }
 
     // MARK: - Seek Bar
