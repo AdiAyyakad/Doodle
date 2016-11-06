@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 
+import java.util.ArrayList;
+
 /**
  * Created by Adi on 11/2/16.
  */
@@ -23,13 +25,12 @@ import android.widget.SeekBar;
 public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListener {
 
     private Resources res = getResources();
-    private Path drawPath;
-    private Paint drawPaint, canvasPaint;
+    private Path drawPath = new Path();
+    private Paint drawPaint = new Paint();
     private int paintColor = 0xFF660000;
     private Canvas drawCanvas;
-    private Bitmap canvasBitmap;
     private ArrayList<APath> paths = new ArrayList<>();
-    private ArrayList<APath> undonePaths = new ArrayList<>();
+    private int amountOfPathsUndone = 0;
 
     public ScribbleView(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -43,14 +44,13 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        drawCanvas = new Canvas(canvasBitmap);
+        drawCanvas = new Canvas(Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        for (APath path : paths) {
+        for (int i = 0; i < paths.size() - amountOfPathsUndone; i++) {
+            APath path = paths.get(i);
             canvas.drawPath(path.path, path.paint);
         }
     }
@@ -58,10 +58,6 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
     // MARK: - Setup
 
     private void setupScribble() {
-
-        // Inits
-        drawPath = new Path();
-        drawPaint = new Paint();
 
         // Setup paint
         drawPaint.setColor(paintColor);
@@ -71,8 +67,6 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
 
-        // Setup canvas paint
-        canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
     // MARK: - Touch Event Handling (Scribbling)
@@ -85,11 +79,13 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                undonePaths.clear();
+                paths.subList(paths.size()-amountOfPathsUndone, paths.size()).clear();
+                amountOfPathsUndone = 0;
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
                 drawPath.lineTo(touchX, touchY);
+                drawCanvas.drawPath(drawPath, drawPaint);
                 break;
             case MotionEvent.ACTION_UP:
                 drawCanvas.drawPath(drawPath, drawPaint);
@@ -108,21 +104,17 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
     // MARK: - Undo/Redo
 
     public void undo() {
-        if (paths.isEmpty()) return;
-
-        undonePaths.add(paths.get(paths.length() - 1));
-        paths.remove(paths.length()-1);
-
-        invalidate();
+        if (paths.size() != amountOfPathsUndone) {
+            amountOfPathsUndone += 1;
+            invalidate();
+        }
     }
 
     public void redo() {
-        if (undonePaths.isEmpty()) return;
-
-        paths.add(undonePaths.get(undonePaths.length() - 1));
-        undonePaths.remove(undonePaths.length()-1);
-
-        invalidate();
+        if (amountOfPathsUndone != 0) {
+            amountOfPathsUndone -= 1;
+            invalidate();
+        }
     }
 
     // MARK: - Seek Bar

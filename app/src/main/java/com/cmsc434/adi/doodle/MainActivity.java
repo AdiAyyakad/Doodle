@@ -36,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickUndoPath(View v) {
         ScribbleView scribbleView = (ScribbleView) findViewById(R.id.scribble);
-        // scribbleView.undo();
+        scribbleView.undo();
     }
 
     public void onClickRedoPath(View v) {
         ScribbleView scribbleView = (ScribbleView) findViewById(R.id.scribble);
-        // scribbleView.onClickRedoPath();
+        scribbleView.redo();
     }
 
 }
