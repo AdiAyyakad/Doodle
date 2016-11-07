@@ -12,4 +12,5 @@
     <string name="green">Green</string>
     <string name="undo">Undo</string>
     <string name="redo">Redo</string>
+    <string name="settings">Settings</string>
 </resources>

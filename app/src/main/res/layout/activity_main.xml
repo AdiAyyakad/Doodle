@@ -1,133 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00660000"
     android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:weightSum="1">
+    tools:context=".MainActivity">
 
     <com.cmsc434.adi.doodle.ScribbleView
         android:id="@+id/scribble"
-        android:layout_width="fill_parent"
-        android:layout_height="215dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="3dp"
-        android:background="#FFFFFFFF" />
-
-    <LinearLayout
-        android:id="@+id/brush_size_layout"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/brush_size"
-            android:gravity="center" />
-
-        <SeekBar
-            android:id="@+id/brush_seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:max="@integer/max_brush_size"
-            android:progress="@integer/initial_size" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/brush_size_layout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/opacity"
-            android:gravity="center" />
-
-        <SeekBar
-            android:id="@+id/opacity_seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:max="@integer/max_opacity"
-            android:progress="@integer/initial_opacity"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/brush_size_layout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/red"
-            android:gravity="center" />
-
-        <SeekBar
-            android:id="@+id/red_seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:max="@integer/max_color"
-            android:progress="@integer/initial_red"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/brush_size_layout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/green"
-            android:gravity="center" />
-
-        <SeekBar
-            android:id="@+id/green_seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:max="@integer/max_color"
-            android:progress="@integer/initial_green"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/brush_size_layout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/blue"
-            android:gravity="center"
-            android:max="@integer/max_color" />
-
-        <SeekBar
-            android:id="@+id/blue_seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:max="@integer/max_color"
-            android:progress="@integer/initial_blue" />
-
-    </LinearLayout>
+        android:background="#FFFFFFFF"
+        android:layout_weight="0.96"
+        android:layout_height="0dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,26 +24,25 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/undo"
-            android:onClick="onClickUndoPath" />
+            android:onClick="onClickUndoPath"
+            android:id="@+id/undo_btn" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/redo"
-            android:onClick="onClickRedoPath" />
+            android:onClick="onClickRedoPath"
+            android:id="@+id/redo_btn" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/settings"
+            android:onClick="onClickSettings"
+            android:id="@+id/settings_btn" />
 
     </LinearLayout>
 
-    <com.cmsc434.adi.doodle.BrushPreviewView
-        android:id="@+id/brush_preview_view"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/max_brush_dimen"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="3dp"
-        android:background="#FFFFFFFF"
-        />
-
-</GridLayout>
+</LinearLayout>
