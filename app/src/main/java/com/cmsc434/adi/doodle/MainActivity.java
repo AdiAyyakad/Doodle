@@ -8,6 +8,7 @@ import android.widget.SeekBar;
 
 public class MainActivity extends AppCompatActivity {
     private ScribbleView scribbleView;
+    private BrushPreviewView brushPreviewView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBrushSizeSeekBar() {
         scribbleView = (ScribbleView) findViewById(R.id.scribble);
+        brushPreviewView = (BrushPreviewView) findViewById(R.id.brush_preview_view);
 
         SeekBar brushSizeSeekBar = (SeekBar) findViewById(R.id.brush_seek_bar);
         SeekBar opacitySeekBar = (SeekBar) findViewById(R.id.opacity_seek_bar);
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
             if (seekBar.getId() == R.id.brush_seek_bar) {
                 scribbleView.drawPaint.setStrokeWidth(i);
+                brushPreviewView.changeSize(i);
             } else {
                 changeColor(seekBar, i);
             }
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             scribbleView.drawPaint.setColor(scribbleView.paintColor);
+            brushPreviewView.changeColor(scribbleView.paintColor);
         }
 
         @Override

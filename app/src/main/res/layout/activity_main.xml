@@ -11,7 +11,7 @@
     <com.cmsc434.adi.doodle.ScribbleView
         android:id="@+id/scribble"
         android:layout_width="fill_parent"
-        android:layout_height="311dp"
+        android:layout_height="215dp"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -35,7 +35,7 @@
             android:id="@+id/brush_seek_bar"
             android:layout_width="fill_parent"
             android:layout_height="30dp"
-            android:max="@integer/largest_size"
+            android:max="@integer/max_brush_size"
             android:progress="@integer/initial_size" />
 
     </LinearLayout>
@@ -150,5 +150,15 @@
 
     </LinearLayout>
 
+    <com.cmsc434.adi.doodle.BrushPreviewView
+        android:id="@+id/brush_preview_view"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/max_brush_dimen"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="3dp"
+        android:background="#FFFFFFFF"
+        />
 
 </GridLayout>

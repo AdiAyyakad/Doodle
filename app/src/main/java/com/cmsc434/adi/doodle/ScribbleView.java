@@ -58,7 +58,6 @@ public class ScribbleView extends View {
     // MARK: - Setup
 
     private void setupPaint() {
-
         // Setup paint
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
@@ -66,7 +65,6 @@ public class ScribbleView extends View {
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
-
     }
 
     // MARK: - Touch Event Handling (Scribbling)
