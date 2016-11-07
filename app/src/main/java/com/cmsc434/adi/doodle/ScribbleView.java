@@ -81,6 +81,8 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
             case MotionEvent.ACTION_DOWN:
                 paths.subList(paths.size()-amountOfPathsUndone, paths.size()).clear();
                 amountOfPathsUndone = 0;
+
+                paths.add(new APath(drawPath, new Paint(drawPaint)));
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -89,7 +91,6 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
                 break;
             case MotionEvent.ACTION_UP:
                 drawCanvas.drawPath(drawPath, drawPaint);
-                paths.add(new APath(drawPath, new Paint(drawPaint)));
                 drawPath = new Path();
                 break;
             default:

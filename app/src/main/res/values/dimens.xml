@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <integer name="largest_size">100</integer>
-    <integer name="max_opacity">100</integer>
+    <integer name="max_opacity">255</integer>
     <integer name="max_color">255</integer>
 
     <integer name="initial_size">20</integer>
