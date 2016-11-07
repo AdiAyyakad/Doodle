@@ -116,4 +116,16 @@ public class ScribbleView extends View {
         }
     }
 
+    public void changePaintColor(int paintColor) {
+        this.paintColor = paintColor;
+        drawPaint.setColor(paintColor);
+    }
+
+    public void changeBrushSize(int brushSize) {
+        drawPaint.setStrokeWidth(brushSize);
+    }
+
+    public int getBrushSize() {
+        return (int) drawPaint.getStrokeWidth();
+    }
 }

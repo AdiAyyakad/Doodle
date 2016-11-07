@@ -20,7 +20,6 @@
     <SeekBar
         android:id="@+id/brush_seek_bar"
         android:max="@integer/max_brush_size"
-        android:progress="@integer/initial_size"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.96"/>
@@ -34,7 +33,6 @@
     <SeekBar
         android:id="@+id/opacity_seek_bar"
         android:max="@integer/max_opacity"
-        android:progress="@integer/initial_opacity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.96" />
@@ -48,7 +46,6 @@
     <SeekBar
         android:id="@+id/red_seek_bar"
         android:max="@integer/max_color"
-        android:progress="@integer/initial_red"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.96" />
@@ -62,7 +59,6 @@
     <SeekBar
         android:id="@+id/green_seek_bar"
         android:max="@integer/max_color"
-        android:progress="@integer/initial_green"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.96" />
@@ -76,7 +72,6 @@
     <SeekBar
         android:id="@+id/blue_seek_bar"
         android:max="@integer/max_color"
-        android:progress="@integer/initial_blue"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.96" />
@@ -96,5 +91,12 @@
         android:layout_marginTop="3dp"
         android:background="#FFFFFFFF"
         android:layout_width="wrap_content" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/close"
+        android:layout_gravity="center"
+        android:onClick="onClickClose"/>
 
 </LinearLayout>
