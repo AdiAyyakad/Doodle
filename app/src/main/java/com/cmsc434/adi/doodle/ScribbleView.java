@@ -35,7 +35,7 @@ public class ScribbleView extends View {
     public ScribbleView(Context context, AttributeSet attrs){
         super(context, attrs);
 
-        setupScribble();
+        setupPaint();
     }
 
     // MARK: - View Overrides
@@ -57,7 +57,7 @@ public class ScribbleView extends View {
 
     // MARK: - Setup
 
-    private void setupScribble() {
+    private void setupPaint() {
 
         // Setup paint
         drawPaint.setColor(paintColor);
