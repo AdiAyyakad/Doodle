@@ -3,7 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <integer name="largest_size">100</integer>
+    <dimen name="max_brush_dimen">100dp</dimen>
+    <integer name="max_brush_size">100</integer>
     <integer name="max_opacity">255</integer>
     <integer name="max_color">255</integer>
 
