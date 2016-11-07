@@ -22,12 +22,12 @@ import java.util.ArrayList;
  * Created by Adi on 11/2/16.
  */
 
-public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListener {
+public class ScribbleView extends View {
 
     private Resources res = getResources();
     private Path drawPath = new Path();
-    private Paint drawPaint = new Paint();
-    private int paintColor = Color.argb(res.getInteger(R.integer.initial_opacity), res.getInteger(R.integer.initial_red), res.getInteger(R.integer.initial_green), res.getInteger(R.integer.initial_blue));
+    Paint drawPaint = new Paint();
+    int paintColor = Color.argb(res.getInteger(R.integer.initial_opacity), res.getInteger(R.integer.initial_red), res.getInteger(R.integer.initial_green), res.getInteger(R.integer.initial_blue));
     private Canvas drawCanvas;
     private ArrayList<APath> paths = new ArrayList<>();
     private int amountOfPathsUndone = 0;
@@ -116,46 +116,6 @@ public class ScribbleView extends View implements SeekBar.OnSeekBarChangeListene
             amountOfPathsUndone -= 1;
             invalidate();
         }
-    }
-
-    // MARK: - Seek Bar
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-        if (seekBar.getId() == R.id.brush_seek_bar) {
-            drawPaint.setStrokeWidth(i);
-        } else {
-            changeColor(seekBar, i);
-        }
-    }
-
-    private void changeColor(SeekBar seekBar, int i) {
-        switch (seekBar.getId()) {
-            case R.id.opacity_seek_bar:
-                paintColor = Color.argb(i, Color.red(paintColor), Color.green(paintColor), Color.blue(paintColor));
-                break;
-            case R.id.red_seek_bar:
-                paintColor = Color.argb(Color.alpha(paintColor), i, Color.green(paintColor), Color.blue(paintColor));
-                break;
-            case R.id.green_seek_bar:
-                paintColor = Color.argb(Color.alpha(paintColor), Color.red(paintColor), i, Color.blue(paintColor));
-                break;
-            case R.id.blue_seek_bar:
-                paintColor = Color.argb(Color.alpha(paintColor), Color.red(paintColor), Color.green(paintColor), i);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid seek bar changed");
-        }
-
-        drawPaint.setColor(paintColor);
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
 }
