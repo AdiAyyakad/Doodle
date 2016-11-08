@@ -9,7 +9,7 @@ Watch it in action at: https://youtu.be/ymgUJVbtEiw
 
 # How To Run
 
-Run `git clone git:njaditya/Doodle.git`
+Run `git clone git@github.com:njaditya/Doodle.git`
 
 Open up Android Studio and run on an emulator or real device.
 
