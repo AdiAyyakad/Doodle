@@ -16,4 +16,7 @@
     <integer name="initial_green">12</integer>
     <integer name="initial_blue">0</integer>
 
+    <integer name="enabled_alpha">255</integer>
+    <integer name="disabled_alpha">100</integer>
+
 </resources>

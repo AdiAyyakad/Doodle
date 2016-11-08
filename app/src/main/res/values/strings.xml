@@ -20,4 +20,10 @@
     <string name="main_brush_size_extra">main_brush_size_extra</string>
     <string name="settings_paint_color_extra">settings_paint_color_extra</string>
     <string name="settings_brush_size_extra">settings_brush_size_extra</string>
+
+    <!-- Alert Dialog -->
+    <string name="clear_dialog_title">Are you sure you want to clear your artwork?</string>
+    <string name="clear_dialog_message">But it\'s so pretty!</string>
+    <string name="clear">Clear</string>
+    <string name="cancel">Cancel</string>
 </resources>

@@ -5,17 +5,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.SeekBar;
-
 import java.util.ArrayList;
 
 /**
@@ -26,6 +20,7 @@ public class ScribbleView extends View {
 
     private Resources res = getResources();
     private Path drawPath = new Path();
+    MainActivity containerActivity;
     Paint drawPaint = new Paint();
     int paintColor = Color.argb(res.getInteger(R.integer.initial_opacity), res.getInteger(R.integer.initial_red), res.getInteger(R.integer.initial_green), res.getInteger(R.integer.initial_blue));
     private Canvas drawCanvas;
@@ -90,6 +85,7 @@ public class ScribbleView extends View {
             case MotionEvent.ACTION_UP:
                 drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath = new Path();
+                canUndoRedo();
                 break;
             default:
                 return false;
@@ -107,6 +103,8 @@ public class ScribbleView extends View {
             amountOfPathsUndone += 1;
             invalidate();
         }
+
+        canUndoRedo();
     }
 
     public void redo() {
@@ -114,6 +112,8 @@ public class ScribbleView extends View {
             amountOfPathsUndone -= 1;
             invalidate();
         }
+
+        canUndoRedo();
     }
 
     public void changePaintColor(int paintColor) {
@@ -128,4 +128,21 @@ public class ScribbleView extends View {
     public int getBrushSize() {
         return (int) drawPaint.getStrokeWidth();
     }
+
+    public void clear() {
+        amountOfPathsUndone = 0;
+        paths.clear();
+        invalidate();
+    }
+
+    public void canUndoRedo() {
+        int enabled = res.getInteger(R.integer.enabled_alpha);
+        int disabled = res.getInteger(R.integer.disabled_alpha);
+
+        boolean canUndo = paths.size() > amountOfPathsUndone;
+        boolean canRedo = amountOfPathsUndone > 0;
+        containerActivity.undo.setImageAlpha(canUndo ? enabled : disabled);
+        containerActivity.redo.setImageAlpha(canRedo ? enabled : disabled);
+    }
+
 }
