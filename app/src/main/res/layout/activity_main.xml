@@ -1,38 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00660000"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
-
-    <LinearLayout
-        android:id="@+id/brush_size_layout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/brush_size"
-            android:gravity="center" />
-
-        <SeekBar
-            android:id="@+id/brush_seek_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"/>
-
-    </LinearLayout>
+    tools:context=".MainActivity">
 
     <com.cmsc434.adi.doodle.ScribbleView
         android:id="@+id/scribble"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="3dp"
         android:background="#FFFFFFFF" />
 
-</LinearLayout>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        app:srcCompat="@drawable/undo"
+        android:id="@+id/undo_btn"
+        android:onClick="onClickUndoPath"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        app:srcCompat="@drawable/clear"
+        android:id="@+id/clear_btn"
+        android:onClick="onClickClear"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        app:srcCompat="@drawable/settings"
+        android:id="@+id/settings_btn"
+        android:onClick="onClickSettings"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/clear_btn"
+        android:layout_toStartOf="@+id/clear_btn"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        app:srcCompat="@drawable/redo"
+        android:id="@+id/redo_btn"
+        android:onClick="onClickRedoPath"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/undo_btn"
+        android:layout_toEndOf="@+id/undo_btn"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
+
+</RelativeLayout>

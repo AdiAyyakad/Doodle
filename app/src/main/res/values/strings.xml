@@ -6,4 +6,24 @@
     <string name="save">Save</string>
     <string name="paint">Paint</string>
     <string name="brush_size">Brush Size</string>
+    <string name="opacity">Opacity</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="settings">Settings</string>
+    <string name="close">Close</string>
+
+    <!-- Intent Keys -->
+    <string name="main_paint_color_extra">main_paint_color_extra</string>
+    <string name="main_brush_size_extra">main_brush_size_extra</string>
+    <string name="settings_paint_color_extra">settings_paint_color_extra</string>
+    <string name="settings_brush_size_extra">settings_brush_size_extra</string>
+
+    <!-- Alert Dialog -->
+    <string name="clear_dialog_title">Are you sure you want to clear your artwork?</string>
+    <string name="clear_dialog_message">But it\'s so pretty!</string>
+    <string name="clear">Clear</string>
+    <string name="cancel">Cancel</string>
 </resources>

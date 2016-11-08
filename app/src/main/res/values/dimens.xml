@@ -2,9 +2,21 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="max_brush_dimen">100dp</dimen>
+    <dimen name="text_view_size">50dp</dimen>
+    <dimen name="seek_bar_size">30dp</dimen>
 
-    <dimen name="smallest_brush">10dp</dimen>
-    <integer name="smallest_size">10</integer>
-    <dimen name="largest_brush">50dp</dimen>
-    <integer name="largest_size">50</integer>
+    <integer name="max_brush_size">100</integer>
+    <integer name="max_opacity">255</integer>
+    <integer name="max_color">255</integer>
+
+    <integer name="initial_size">20</integer>
+    <integer name="initial_opacity">255</integer>
+    <integer name="initial_red">0</integer>
+    <integer name="initial_green">12</integer>
+    <integer name="initial_blue">0</integer>
+
+    <integer name="enabled_alpha">255</integer>
+    <integer name="disabled_alpha">100</integer>
+
 </resources>

@@ -1,13 +1,16 @@
 package com.cmsc434.adi.doodle;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.MotionEvent;
 import android.util.AttributeSet;
 import android.view.View;
+import java.util.ArrayList;
 
 /**
  * Created by Adi on 11/2/16.
@@ -15,17 +18,19 @@ import android.view.View;
 
 public class ScribbleView extends View {
 
-    private Path drawPath;
-    private Paint drawPaint, canvasPaint;
-    private int paintColor = 0xFF660000;
-    private int brushSize = R.dimen.smallest_brush;
+    private Resources res = getResources();
+    private Path drawPath = new Path();
+    MainActivity containerActivity;
+    Paint drawPaint = new Paint();
+    int paintColor = Color.argb(res.getInteger(R.integer.initial_opacity), res.getInteger(R.integer.initial_red), res.getInteger(R.integer.initial_green), res.getInteger(R.integer.initial_blue));
     private Canvas drawCanvas;
-    private Bitmap canvasBitmap;
+    private ArrayList<APath> paths = new ArrayList<>();
+    private int amountOfPathsUndone = 0;
 
     public ScribbleView(Context context, AttributeSet attrs){
         super(context, attrs);
 
-        setupScribble();
+        setupPaint();
     }
 
     // MARK: - View Overrides
@@ -34,38 +39,30 @@ public class ScribbleView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        drawCanvas = new Canvas(canvasBitmap);
+        drawCanvas = new Canvas(Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888));
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        canvas.drawPath(drawPath, drawPaint);
+        for (int i = 0; i < paths.size() - amountOfPathsUndone; i++) {
+            APath path = paths.get(i);
+            canvas.drawPath(path.path, path.paint);
+        }
     }
 
     // MARK: - Setup
 
-    private void setupScribble() {
-
-        // Inits
-        drawPath = new Path();
-        drawPaint = new Paint();
-
+    private void setupPaint() {
         // Setup paint
         drawPaint.setColor(paintColor);
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(20);
+        drawPaint.setStrokeWidth(res.getInteger(R.integer.initial_size));
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
-
-        // Setup canvas paint
-        canvasPaint = new Paint(Paint.DITHER_FLAG);
-
     }
 
-    // MARK: - Touch Events
+    // MARK: - Touch Event Handling (Scribbling)
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -75,17 +72,20 @@ public class ScribbleView extends View {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                System.out.println("DOWN");
+                paths.subList(paths.size()-amountOfPathsUndone, paths.size()).clear();
+                amountOfPathsUndone = 0;
+
+                paths.add(new APath(drawPath, new Paint(drawPaint)));
                 drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                System.out.println("MOVE");
                 drawPath.lineTo(touchX, touchY);
+                drawCanvas.drawPath(drawPath, drawPaint);
                 break;
             case MotionEvent.ACTION_UP:
-                System.out.println("UP");
                 drawCanvas.drawPath(drawPath, drawPaint);
-                drawPath.reset();
+                drawPath = new Path();
+                canUndoRedo();
                 break;
             default:
                 return false;
@@ -94,6 +94,55 @@ public class ScribbleView extends View {
         invalidate();
         return true;
 
+    }
+
+    // MARK: - Undo/Redo
+
+    public void undo() {
+        if (paths.size() != amountOfPathsUndone) {
+            amountOfPathsUndone += 1;
+            invalidate();
+        }
+
+        canUndoRedo();
+    }
+
+    public void redo() {
+        if (amountOfPathsUndone != 0) {
+            amountOfPathsUndone -= 1;
+            invalidate();
+        }
+
+        canUndoRedo();
+    }
+
+    public void changePaintColor(int paintColor) {
+        this.paintColor = paintColor;
+        drawPaint.setColor(paintColor);
+    }
+
+    public void changeBrushSize(int brushSize) {
+        drawPaint.setStrokeWidth(brushSize);
+    }
+
+    public int getBrushSize() {
+        return (int) drawPaint.getStrokeWidth();
+    }
+
+    public void clear() {
+        amountOfPathsUndone = 0;
+        paths.clear();
+        invalidate();
+    }
+
+    public void canUndoRedo() {
+        int enabled = res.getInteger(R.integer.enabled_alpha);
+        int disabled = res.getInteger(R.integer.disabled_alpha);
+
+        boolean canUndo = paths.size() > amountOfPathsUndone;
+        boolean canRedo = amountOfPathsUndone > 0;
+        containerActivity.undo.setImageAlpha(canUndo ? enabled : disabled);
+        containerActivity.redo.setImageAlpha(canRedo ? enabled : disabled);
     }
 
 }
